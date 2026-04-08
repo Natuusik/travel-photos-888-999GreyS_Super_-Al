@@ -2,23 +2,74 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Главная</title>
+<title>Путешествия</title>
+
 <style>
-body { background:#111; color:#fff; font-family:Arial; margin:0; }
-.cards { margin-top:80px; display:flex; justify-content:center; gap:20px; }
-.card { width:200px; background:#222; border-radius:10px; cursor:pointer; }
-.card img { width:100%; height:140px; object-fit:cover; }
-.card p { text-align:center; padding:10px; }
+body {
+    margin: 0;
+    background: #111;
+    color: #fff;
+    font-family: Arial, sans-serif;
+}
+
+/* Контейнер карточек */
+.cards {
+    margin-top: 80px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+/* Карточка */
+.card {
+    width: 260px;
+    background: #1c1c1c;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 0 15px rgba(0,0,0,0.4);
+}
+.card:hover {
+    transform: scale(1.05);
+}
+
+/* Фото */
+.card img {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+}
+
+/* Текст */
+.card p {
+    text-align: center;
+    padding: 12px;
+    font-size: 20px;
+    font-weight: bold;
+}
 </style>
 </head>
 
 <body>
 
+<h1 style="text-align:center; margin-top:40px; font-size:32px;">Мои путешествия</h1>
+
 <div class="cards">
+
+    <!-- Карточка 1 -->
     <div class="card" onclick="location.href='vse/croatia2024.html'">
         <img src="vse/montenegro/1.jpg">
         <p>Хорватия 2024</p>
     </div>
+
+    <!-- Карточка 2 -->
+    <div class="card" onclick="location.href='vse/croatia2024_1.html'">
+        <img src="vse/montenegro/2.jpg">
+        <p>Хорватия 2024 — часть 2</p>
+    </div>
+
 </div>
 
 </body>
