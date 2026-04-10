@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Турция 2023</title>
+
+<style>
+body {
+    margin: 0;
+    background: linear-gradient(135deg, #fff6f0, #e8faff);
+    color: #444;
+    font-family: Arial;
+    text-align: center;
+}
+
+.back-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 48px;
+    height: 48px;
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(6px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #444;
+    font-size: 22px;
+    text-decoration: none;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    transform: scale(1.12);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    background: rgba(255,255,255,0.95);
+}
+
+.gallery img {
+    width: 80%;
+    max-width: 700px;
+    margin-top: 100px;
+    border-radius: 14px;
+    transition: 0.3s;
+}
+
+.btn {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #ffffffaa;
+    border: none;
+    color: #444;
+    padding: 12px 18px;
+    cursor: pointer;
+    font-size: 22px;
+    border-radius: 10px;
+}
+.prev { left: 20px; }
+.next { right: 20px; }
+</style>
+</head>
+
+<body>
+
+<a href="years2023.html" class="back-btn">❮</a>
+
+<div class="gallery">
+    <button class="btn prev" id="prev">❮</button>
+    <img id="photo" src="turkieyOnlyTwo/1.jpg">
+    <button class="btn next" id="next">❯</button>
+</div>
+
+<script>
+const images = [
+    "turkieyOnlyTwo/1.jpg",
+    "turkieyOnlyTwo/2.jpg",
+    "turkieyOnlyTwo/3.jpg",
+    "turkieyOnlyTwo/4.jpg",
+    "turkieyOnlyTwo/5.jpg",
+    "turkieyOnlyTwo/6.jpg",
+    "turkieyOnlyTwo/7.jpg",
+    "turkieyOnlyTwo/8.jpg",
+    "turkieyOnlyTwo/9.jpg",
+    "turkieyOnlyTwo/10.jpg",
+    "turkieyOnlyTwo/11.jpg",
+    "turkieyOnlyTwo/12.jpg",
+    "turkieyOnlyTwo/13.jpg",
+    "turkieyOnlyTwo/14.jpg",
+    "turkieyOnlyTwo/15.jpg",
+    "turkieyOnlyTwo/16.jpg",
+    "turkieyOnlyTwo/17.jpg",
+    "turkieyOnlyTwo/18.jpg",
+    "turkieyOnlyTwo/19.jpg",
+    "turkieyOnlyTwo/20.jpg",
+    "turkieyOnlyTwo/21.jpg",
+    "turkieyOnlyTwo/22.jpg",
+    "turkieyOnlyTwo/23.jpg",
+    "turkieyOnlyTwo/24.jpg",
+    "turkieyOnlyTwo/25.jpg",
+    "turkieyOnlyTwo/26.jpg"
+];
+
+let index = 0;
+const photo = document.getElementById("photo");
+
+document.getElementById("next").onclick = () => {
+    index = (index + 1) % images.length;
+    photo.src = images[index];
+};
+
+document.getElementById("prev").onclick = () => {
+    index = (index - 1 + images.length) % images.length;
+    photo.src = images[index];
+};
+</script>
+
+</body>
+</html>

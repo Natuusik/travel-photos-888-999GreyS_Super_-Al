@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>2024</title>
+
+<style>
+body {
+    margin: 0;
+    background: linear-gradient(135deg, #e8faff, #fff0f4);
+    color: #444;
+    font-family: Arial;
+}
+
+.back-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 48px;
+    height: 48px;
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(6px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #444;
+    font-size: 22px;
+    text-decoration: none;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    transform: scale(1.12);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    background: rgba(255,255,255,0.95);
+}
+
+.cards {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 35px;
+    padding: 20px 40px 80px;
+}
+
+.card {
+    background: rgba(255,255,255,0.75);
+    border-radius: 18px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: 0.35s ease;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    border: 1px solid rgba(255,255,255,0.9);
+    animation: fadeIn 0.6s ease forwards;
+    opacity: 0;
+}
+
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.2s; }
+.card:nth-child(3) { animation-delay: 0.3s; }
+.card:nth-child(4) { animation-delay: 0.4s; }
+.card:nth-child(5) { animation-delay: 0.5s; }
+.card:nth-child(6) { animation-delay: 0.6s; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.card:hover {
+    transform: translateY(-8px) scale(1.04);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.18);
+}
+
+.card img {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+    filter: brightness(1.05) saturate(1.1);
+}
+
+.card p {
+    text-align: center;
+    padding: 16px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #444;
+}
+
+</style>
+</head>
+
+<body>
+<a href="../index.html" class="back-btn">❮</a>
+
+
+
+
+
+<div class="cards">
+
+
+    <!-- Год 2023 -->
+
+
+  <div class="card" onclick="location.href='turkieyOnlyTwo_1.html'">
+        <img src="turkieyOnlyTwo/1.jpg">
+        <p>Турция 2023</p>
+    </div>
+
+ 
+
+    
+</div>
+
+</body>
+</html>
