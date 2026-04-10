@@ -69,7 +69,8 @@ body {
 
 <div class="gallery">
     <button class="btn prev" id="prev">❮</button>
-    <img id="photo" src="turkieyOnlyTwo/1.jpg">
+  <img id="photo" src="turkieyOnlyTwo/1.jpg" onclick="nextPhoto()">
+
     <button class="btn next" id="next">❯</button>
 </div>
 
@@ -106,15 +107,24 @@ const images = [
 let index = 0;
 const photo = document.getElementById("photo");
 
-document.getElementById("next").onclick = () => {
+function nextPhoto() {
     index = (index + 1) % images.length;
     photo.src = images[index];
-};
+}
 
-document.getElementById("prev").onclick = () => {
+function prevPhoto() {
     index = (index - 1 + images.length) % images.length;
     photo.src = images[index];
-};
+}
+
+document.getElementById("next").onclick = nextPhoto;
+document.getElementById("prev").onclick = prevPhoto;
+document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") nextPhoto();
+    if (e.key === "ArrowLeft") prevPhoto();
+});
+
+
 </script>
 
 </body>
