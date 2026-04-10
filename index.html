@@ -224,7 +224,7 @@ h1 {
 </head>
 
 <body>
-<div id="password-screen">
+ <div id="password-screen">
     <div class="password-box">
         <h2>Введите пароль</h2>
         <input type="password" id="passInput" placeholder="Пароль">
@@ -331,6 +331,11 @@ function checkPass() {
         document.getElementById("error").innerText = "Неверный пароль";
     }
 }
+document.getElementById("passInput").addEventListener("keydown", function(e) {
+    if (e.key === "Enter") {
+        checkPass();
+    }
+});
 
 </script>
 
