@@ -8,9 +8,8 @@
 body {
     margin: 0;
     background: #000;
-    color: #444;
     font-family: Arial;
-    text-align: center;
+    overflow: hidden;
 }
 
 /* Кнопка назад */
@@ -31,24 +30,24 @@ body {
     text-decoration: none;
     box-shadow: 0 6px 18px rgba(0,0,0,0.15);
     transition: 0.3s;
+    z-index: 10;
 }
 .back-btn:hover {
     transform: scale(1.12);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
 }
 
 /* Фото */
 #photo {
-    width: auto;
-    height: auto;
     max-width: 100vw;
     max-height: 100vh;
+    width: auto;
+    height: auto;
     object-fit: contain;
-    background: #000;
     display: block;
     margin: 0 auto;
-    transition: opacity 0.4s ease, transform 0.3s ease;
+    background: #000;
     opacity: 0;
+    transition: opacity 0.25s ease, transform 0.3s ease;
 }
 #photo.show {
     opacity: 1;
@@ -70,6 +69,7 @@ body {
     cursor: pointer;
     font-size: 26px;
     border-radius: 10px;
+    z-index: 10;
 }
 .prev { left: 20px; }
 .next { right: 20px; }
@@ -81,11 +81,9 @@ body {
 
 <a href="years2023.html" class="back-btn">❮</a>
 
-<div class="gallery">
-    <button class="btn prev" id="prev">❮</button>
-    <img id="photo" src="turkieyOnlyTwo/1.jpg">
-    <button class="btn next" id="next">❯</button>
-</div>
+<button class="btn prev" id="prev">❮</button>
+<img id="photo" src="turkieyOnlyTwo/1.jpg">
+<button class="btn next" id="next">❯</button>
 
 <script>
 const images = [
@@ -120,14 +118,15 @@ const images = [
 let index = 0;
 const photo = document.getElementById("photo");
 
+/* Быстрая смена фото через onload */
 function changePhoto() {
     photo.classList.remove("show");
-    setTimeout(() => {
-        photo.src = images[index];
-    }, 50);
-    setTimeout(() => {
+
+    photo.onload = () => {
         photo.classList.add("show");
-    }, 100);
+    };
+
+    photo.src = images[index];
 }
 
 function nextPhoto() {
@@ -143,6 +142,7 @@ function prevPhoto() {
 document.getElementById("next").onclick = nextPhoto;
 document.getElementById("prev").onclick = prevPhoto;
 
+/* Стрелки на клавиатуре */
 document.addEventListener("keydown", (e) => {
     if (e.key === "ArrowRight") nextPhoto();
     if (e.key === "ArrowLeft") prevPhoto();
