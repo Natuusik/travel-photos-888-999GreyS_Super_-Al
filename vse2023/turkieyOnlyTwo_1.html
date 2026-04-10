@@ -10,7 +10,14 @@ body {
     background: #000;
     font-family: Arial;
     overflow: hidden;
+
+    /* Центрируем фото по вертикали и горизонтали */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
+
 
 /* Кнопка назад */
 .back-btn {
@@ -36,6 +43,8 @@ body {
     transform: scale(1.12);
 }
 
+
+
 /* Фото */
 #photo {
     max-width: 100vw;
@@ -44,18 +53,11 @@ body {
     height: auto;
     object-fit: contain;
     display: block;
-    margin: 0 auto;
+
     background: #000;
     opacity: 0;
     transition: opacity 0.25s ease, transform 0.3s ease;
 }
-#photo.show {
-    opacity: 1;
-}
-.zoomed {
-    transform: scale(1.8);
-}
-
 /* Кнопки переключения */
 .btn {
     position: fixed;
