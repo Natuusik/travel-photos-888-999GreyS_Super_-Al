@@ -9,15 +9,15 @@ body {
     margin: 0;
     background: #000;
     font-family: Arial;
-    overflow: hidden;
 
-    /* Центрируем фото по вертикали и горизонтали */
+    /* Центрирование фото */
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-}
 
+    height: 100vh;
+    overflow: hidden;
+}
 
 /* Кнопка назад */
 .back-btn {
@@ -43,8 +43,6 @@ body {
     transform: scale(1.12);
 }
 
-
-
 /* Фото */
 #photo {
     max-width: 100vw;
@@ -52,12 +50,20 @@ body {
     width: auto;
     height: auto;
     object-fit: contain;
-    display: block;
 
-    background: #000;
+    display: block;
+    margin: auto;
+
     opacity: 0;
     transition: opacity 0.25s ease, transform 0.3s ease;
 }
+#photo.show {
+    opacity: 1;
+}
+.zoomed {
+    transform: scale(1.8);
+}
+
 /* Кнопки переключения */
 .btn {
     position: fixed;
@@ -120,7 +126,7 @@ const images = [
 let index = 0;
 const photo = document.getElementById("photo");
 
-/* Быстрая смена фото через onload */
+/* Быстрая смена фото */
 function changePhoto() {
     photo.classList.remove("show");
 
@@ -141,16 +147,16 @@ function prevPhoto() {
     changePhoto();
 }
 
+/* Листание по кнопкам */
 document.getElementById("next").onclick = nextPhoto;
 document.getElementById("prev").onclick = prevPhoto;
 
-/* Стрелки на клавиатуре */
-document.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowRight") nextPhoto();
-    if (e.key === "ArrowLeft") prevPhoto();
+/* Листание по нажатию на фото */
+photo.addEventListener("click", () => {
+    nextPhoto();
 });
 
-/* Двойной тап для зума */
+/* Двойной тап — зум */
 let lastTap = 0;
 photo.addEventListener("click", () => {
     const now = Date.now();
@@ -159,7 +165,14 @@ photo.addEventListener("click", () => {
     }
     lastTap = now;
 });
+
+/* Стрелки на клавиатуре */
+document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") nextPhoto();
+    if (e.key === "ArrowLeft") prevPhoto();
+});
 </script>
 
 </body>
 </html>
+    
