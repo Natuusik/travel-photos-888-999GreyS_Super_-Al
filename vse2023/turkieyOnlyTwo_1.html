@@ -60,6 +60,14 @@ body {
 }
 .prev { left: 20px; }
 .next { right: 20px; }
+#photo {
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+#photo.show {
+    opacity: 1;
+}
 
     @media (max-width: 768px) {
     .gallery img {
@@ -138,13 +146,22 @@ const photo = document.getElementById("photo");
 
 function nextPhoto() {
     index = (index + 1) % images.length;
-    photo.src = images[index];
+    changePhoto();
 }
 
 function prevPhoto() {
     index = (index - 1 + images.length) % images.length;
-    photo.src = images[index];
+    changePhoto();
 }
+
+function changePhoto() {
+    photo.classList.remove("show");
+    setTimeout(() => {
+        photo.src = images[index];
+        photo.classList.add("show");
+    }, 50);
+}
+
 
 document.getElementById("next").onclick = nextPhoto;
 document.getElementById("prev").onclick = prevPhoto;
