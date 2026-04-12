@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Турция 2023</title>
+
+<style>
+
+body {
+    margin: 0;
+    background: #000;
+    font-family: Arial;
+    overflow: hidden;
+    height: 100vh;
+}
+
+/* Кнопка назад */
+.back-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 48px;
+    height: 48px;
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(6px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #444;
+    font-size: 22px;
+    text-decoration: none;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    transition: 0.3s;
+    z-index: 10;
+}
+.back-btn:hover {
+    transform: scale(1.12);
+}
+
+/* Фото */
+#photo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    max-width: 100vw;
+    max-height: 100vh;
+    object-fit: contain;
+
+    opacity: 0;
+    transition: opacity 0.25s ease, transform 0.3s ease;
+}
+
+#photo.show {
+    opacity: 1;
+}
+.zoomed {
+    transform: scale(1.8);
+}
+
+/* Кнопки переключения */
+.btn {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(4px);
+    border: none;
+    color: #fff;
+    padding: 12px 18px;
+    cursor: pointer;
+    font-size: 26px;
+    border-radius: 10px;
+    z-index: 10;
+}
+.prev { left: 20px; }
+.next { right: 20px; }
+
+</style>
+</head>
+
+<body>
+
+<a href="years2023.html" class="back-btn">❮</a>
+
+<button class="btn prev" id="prev">❮</button>
+<img id="photo" src="turkieyWithFrends2023/1.jpg">
+<button class="btn next" id="next">❯</button>
+
+<script>
+const images = [
+    "turkieyWithFrends2023/1.jpg",
+    "turkieyWithFrends2023/2.jpg",
+    "turkieyWithFrends2023/3.jpg",
+    "turkieyWithFrends2023/4.jpg",
+    "turkieyWithFrends2023/5.jpg",
+    "turkieyWithFrends2023/6.jpg",
+    "turkieyWithFrends2023/7.jpg",
+    "turkieyWithFrends2023/8.jpg",
+    "turkieyWithFrends2023/9.jpg",
+    "turkieyWithFrends2023/10.jpg",
+    "turkieyWithFrends2023/11.jpg",
+    "turkieyWithFrends2023/12.jpg",
+    "turkieyWithFrends2023/13.jpg",
+    "turkieyWithFrends2023/14.jpg",
+    "turkieyWithFrends2023/15.jpg",
+    "turkieyWithFrends2023/16.jpg",
+    "turkieyWithFrends2023/17.jpg",
+    "turkieyWithFrends2023/18.jpg",
+    "turkieyWithFrends2023/19.jpg",
+    "turkieyWithFrends2023/20.jpg",
+    "turkieyWithFrends2023/21.jpg",
+    "turkieyWithFrends2023/22.jpg",
+    "turkieyWithFrends2023/23.jpg",
+    "turkieyWithFrends2023/24.jpg",
+    "turkieyWithFrends2023/25.jpg",
+    "turkieyWithFrends2023/26.jpg",
+    "turkieyWithFrends2023/27.jpg",
+    "turkieyWithFrends2023/28.jpg",
+    "turkieyWithFrends2023/29.jpg",
+    "turkieyWithFrends2023/30.jpg",
+    "turkieyWithFrends2023/31.jpg",
+    "turkieyWithFrends2023/32.jpg",
+    "turkieyWithFrends2023/33.jpg",
+    "turkieyWithFrends2023/34.jpg",
+    "turkieyWithFrends2023/35.jpg",
+    "turkieyWithFrends2023/36.jpg",
+    "turkieyWithFrends2023/37.jpg",
+    "turkieyWithFrends2023/38.jpg",
+    "turkieyWithFrends2023/39.jpg",
+    "turkieyWithFrends2023/40.jpg",
+    "turkieyWithFrends2023/41.jpg",
+    "turkieyWithFrends2023/42.jpg",
+    "turkieyWithFrends2023/43.jpg",
+    "turkieyWithFrends2023/44.jpg",
+    "turkieyWithFrends2023/45.jpg",
+    "turkieyWithFrends2023/46.jpg",
+    "turkieyWithFrends2023/47.jpg",
+    "turkieyWithFrends2023/48.jpg",
+    "turkieyWithFrends2023/49.jpg",
+    "turkieyWithFrends2023/50.jpg",
+    "turkieyWithFrends2023/51.jpg",
+    "turkieyWithFrends2023/52.jpg",
+    "turkieyWithFrends2023/53.jpg",
+    "turkieyWithFrends2023/54.jpg",
+    "turkieyWithFrends2023/55.jpg",
+    "turkieyWithFrends2023/56.jpg",
+    "turkieyWithFrends2023/57.jpg",
+    "turkieyWithFrends2023/58.jpg",
+    "turkieyWithFrends2023/59.jpg",
+    "turkieyWithFrends2023/60.jpg",
+    "turkieyWithFrends2023/61.jpg",
+    "turkieyWithFrends2023/62.jpg",
+    "turkieyWithFrends2023/63.jpg",
+    "turkieyWithFrends2023/64.jpg",
+    "turkieyWithFrends2023/65.jpg",
+    "turkieyWithFrends2023/66.jpg",
+    "turkieyWithFrends2023/67.jpg",
+    "turkieyWithFrends2023/68.jpg",
+    "turkieyWithFrends2023/69.jpg",
+    "turkieyWithFrends2023/70.jpg",
+    "turkieyWithFrends2023/71.jpg",
+    "turkieyWithFrends2023/72.jpg",
+    "turkieyWithFrends2023/73.jpg",
+    "turkieyWithFrends2023/74.jpg",
+    "turkieyWithFrends2023/75.jpg",
+    "turkieyWithFrends2023/76.jpg",
+    "turkieyWithFrends2023/77.jpg",
+    "turkieyWithFrends2023/78.jpg",
+    "turkieyWithFrends2023/79.jpg",
+"turkieyWithFrends2023/80.jpg"
+];
+
+let index = 0;
+const photo = document.getElementById("photo");
+
+// показываем первое фото сразу
+photo.onload = () => {
+    photo.classList.add("show");
+};
+
+// плавная смена фото без чёрного экрана
+function changePhoto() {
+    photo.classList.remove("show");
+
+    const newSrc = images[index];
+    const temp = new Image();
+    temp.src = newSrc;
+
+    temp.onload = () => {
+        photo.src = newSrc;
+        photo.classList.add("show");
+    };
+}
+
+function nextPhoto() {
+    index = (index + 1) % images.length;
+    changePhoto();
+}
+
+function prevPhoto() {
+    index = (index - 1 + images.length) % images.length;
+    changePhoto();
+}
+
+document.getElementById("next").onclick = nextPhoto;
+document.getElementById("prev").onclick = prevPhoto;
+
+// одиночный тап = следующее фото
+// двойной тап = зум
+let lastTap = 0;
+
+photo.addEventListener("click", () => {
+    const now = Date.now();
+
+    if (now - lastTap < 300) {
+        // двойной тап
+        photo.classList.toggle("zoomed");
+    } else {
+        // одиночный тап
+        nextPhoto();
+    }
+
+    lastTap = now;
+});
+
+// стрелки клавиатуры
+document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") nextPhoto();
+    if (e.key === "ArrowLeft") prevPhoto();
+});
+</script>
+
+</body>
+</html>
