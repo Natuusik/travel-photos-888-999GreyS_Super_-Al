@@ -9,15 +9,10 @@ body {
     margin: 0;
     background: #000;
     font-family: Arial;
-
-    /* Центрирование фото */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    height: 100vh;
     overflow: hidden;
+    height: 100vh;
 }
+
 
 /* Кнопка назад */
 .back-btn {
@@ -45,18 +40,19 @@ body {
 
 /* Фото */
 #photo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
     max-width: 100vw;
     max-height: 100vh;
-    width: auto;
-    height: auto;
     object-fit: contain;
-
-    display: block;
-    margin: auto;
 
     opacity: 0;
     transition: opacity 0.25s ease, transform 0.3s ease;
 }
+
 #photo.show {
     opacity: 1;
 }
@@ -142,15 +138,23 @@ const images = [
 let index = 0;
 const photo = document.getElementById("photo");
 
-/* Быстрая смена фото */
+// показываем первое фото сразу
+photo.onload = () => {
+    photo.classList.add("show");
+};
+
+// плавная смена фото без чёрного экрана
 function changePhoto() {
     photo.classList.remove("show");
 
-    photo.onload = () => {
+    const newSrc = images[index];
+    const temp = new Image();
+    temp.src = newSrc;
+
+    temp.onload = () => {
+        photo.src = newSrc;
         photo.classList.add("show");
     };
-
-    photo.src = images[index];
 }
 
 function nextPhoto() {
@@ -163,30 +167,35 @@ function prevPhoto() {
     changePhoto();
 }
 
-/* Листание по кнопкам */
 document.getElementById("next").onclick = nextPhoto;
 document.getElementById("prev").onclick = prevPhoto;
 
-/* Листание по нажатию на фото */
-photo.addEventListener("click", () => {
-    nextPhoto();
-});
-
-/* Двойной тап — зум */
+// одиночный тап = следующее фото
+// двойной тап = зум
 let lastTap = 0;
+
 photo.addEventListener("click", () => {
     const now = Date.now();
+
     if (now - lastTap < 300) {
+        // двойной тап
         photo.classList.toggle("zoomed");
+    } else {
+        // одиночный тап
+        nextPhoto();
     }
+
     lastTap = now;
 });
 
-/* Стрелки на клавиатуре */
+// стрелки клавиатуры
 document.addEventListener("keydown", (e) => {
     if (e.key === "ArrowRight") nextPhoto();
     if (e.key === "ArrowLeft") prevPhoto();
 });
+
+
+
 </script>
 
 </body>
