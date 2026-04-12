@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Турция 2023</title>
+
+<style>
+
+body {
+    margin: 0;
+    background: #000;
+    font-family: Arial;
+    overflow: hidden;
+    height: 100vh;
+}
+
+/* Кнопка назад */
+.back-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 48px;
+    height: 48px;
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(6px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #444;
+    font-size: 22px;
+    text-decoration: none;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    transition: 0.3s;
+    z-index: 10;
+}
+.back-btn:hover {
+    transform: scale(1.12);
+}
+
+/* Фото */
+#photo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    max-width: 100vw;
+    max-height: 100vh;
+    object-fit: contain;
+
+    opacity: 0;
+    transition: opacity 0.25s ease, transform 0.3s ease;
+}
+
+#photo.show {
+    opacity: 1;
+}
+.zoomed {
+    transform: scale(1.8);
+}
+
+/* Кнопки переключения */
+.btn {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(4px);
+    border: none;
+    color: #fff;
+    padding: 12px 18px;
+    cursor: pointer;
+    font-size: 26px;
+    border-radius: 10px;
+    z-index: 10;
+}
+.prev { left: 20px; }
+.next { right: 20px; }
+
+
+</style>
+</head>
+
+<body>
+
+<a href="years2023.html" class="back-btn">❮</a>
+
+<button class="btn prev" id="prev">❮</button>
+<img id="photo" src="raznoe2023/1.jpg">
+<button class="btn next" id="next">❯</button>
+
+<script>
+const images = [
+    "raznoe2023/1.jpg",
+    "raznoe2023/2.jpg",
+    "raznoe2023/3.jpg",
+    "raznoe2023/4.jpg",
+    "raznoe2023/5.jpg",
+    "raznoe2023/6.jpg",
+    "raznoe2023/7.jpg",
+    "raznoe2023/8.jpg",
+    "raznoe2023/9.jpg",
+    "raznoe2023/10.jpg",
+    "raznoe2023/11.jpg",
+    "raznoe2023/12.jpg",
+    "raznoe2023/13.jpg",
+    "raznoe2023/14.jpg",
+    "raznoe2023/15.jpg",
+    "raznoe2023/16.jpg",
+    "raznoe2023/17.jpg",
+    "raznoe2023/18.jpg",
+    "raznoe2023/19.jpg",
+    "raznoe2023/20.jpg",
+    "raznoe2023/21.jpg",
+    "raznoe2023/22.jpg",
+    "raznoe2023/23.jpg",
+    "raznoe2023/24.jpg",
+    "raznoe2023/26.jpg",
+    "raznoe2023/27.jpg",
+    "raznoe2023/28.jpg",
+    "raznoe2023/29.jpg",
+    "raznoe2023/30.jpg",
+    "raznoe2023/31.jpg",
+ "raznoe2023/32.jpg"
+];
+
+
+let index = 0;
+const photo = document.getElementById("photo");
+
+// показываем первое фото сразу
+photo.onload = () => {
+    photo.classList.add("show");
+};
+
+// плавная смена фото без чёрного экрана
+function changePhoto() {
+    photo.classList.remove("show");
+
+    const newSrc = images[index];
+    const temp = new Image();
+    temp.src = newSrc;
+
+    temp.onload = () => {
+        photo.src = newSrc;
+        photo.classList.add("show");
+    };
+}
+
+function nextPhoto() {
+    index = (index + 1) % images.length;
+    changePhoto();
+}
+
+function prevPhoto() {
+    index = (index - 1 + images.length) % images.length;
+    changePhoto();
+}
+
+document.getElementById("next").onclick = nextPhoto;
+document.getElementById("prev").onclick = prevPhoto;
+
+// одиночный тап = следующее фото
+// двойной тап = зум
+let lastTap = 0;
+
+photo.addEventListener("click", () => {
+    const now = Date.now();
+
+    if (now - lastTap < 300) {
+        // двойной тап
+        photo.classList.toggle("zoomed");
+    } else {
+        // одиночный тап
+        nextPhoto();
+    }
+
+    lastTap = now;
+});
+
+// стрелки клавиатуры
+document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") nextPhoto();
+    if (e.key === "ArrowLeft") prevPhoto();
+});
+</script>
+
+</body>
+</html>
